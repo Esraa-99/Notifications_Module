@@ -1,27 +1,26 @@
 import java.util.ArrayList;
 
 public class NotificationTemplate {
-	private String subject;
-	private String content;
-	private String placeholder;
-	private ArrayList <String> values;
-	TemplateParser parser;
-	private ArrayList <NotificationTemplate> addedTemplates; //when function create is done n7ut feha l added
-	NotificationTemplate (){
-		
-	}
+	
+	String subject;
+	String content;
+	String placeholder;
+	ArrayList<int> placeholderIndices;
+
 	public void setSubject(String subject) {
 		this.subject=subject;
 	}
 	public String getSubject() {
 		return subject;
 	}
+	
 	public void setContent(String content) {
 		this.content=content;
 	}
 	public String getContent () {
 		return content;
 	}
+	
 	public void setPlaceholder(String placeholder) {
 		this.placeholder=placeholder;
 	}
@@ -29,25 +28,18 @@ public class NotificationTemplate {
 		return placeholder;
 	}
 	
-	public void setValues(ArrayList<String> values) {
-		this.values = values;
+	public void setPlaceholderIndices(ArrayList<int> placeholderIndices) {
+		this.placeholderIndices=placeholderIndices;
 	}
-	public ArrayList<String> getValues() {
-		return values;
-	}
-	public void setParser(TemplateParser parser) {
-		this.parser = parser;
-	}
-	public TemplateParser getParser() {
-		return parser;
-	}
-	public void setAddedTemplates(ArrayList <NotificationTemplate> AddedTemplates) {
-		this.addedTemplates=addedTemplates;
-	}
-	public ArrayList <NotificationTemplate> getAddedTemplates(){
-		return addedTemplates;
+	public ArrayList<int> getPlaceholderIndices() {
+		return placeholderIndices;
 	}
 	
-	
-
+	public void insertValues(ArrayList<String> values) {		
+		// if values.size() != placeholderIndices.size()
+			// equalize with empty strings
+		// for loop, starting 0, ending at placeholderIndices.size()
+		// if value is not empty string
+			// replace placeholder with value at same index
+	}
 }
