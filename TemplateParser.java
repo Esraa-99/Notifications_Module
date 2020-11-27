@@ -1,23 +1,28 @@
 import java.util.ArrayList;
 
 public class TemplateParser {
-	
-	private ArrayList <Integer> placeholderIndex;
-	
-	public ArrayList<Integer> parse(String content, String placeholder){
-		String[] splitContent = content.split(placeholder);
 
-		int placeholderLength = placeholder.length();
-		int index = 0;
+    private ArrayList<Integer> placeholderIndex;
 
-		for (String item : splitContent) {
-			index += item.length();
-			placeholderIndex.add(index);
-			if (index + placeholderLength < content.length())
-				index += placeholderLength;
-		}
+    public ArrayList<Integer> parse(String content, String placeholder) {
+        if (placeholder.length() > 0 && content.length() > 0) {
+            placeholderIndex = new ArrayList<>();
+            for (int i = 0; i < content.length(); i++) {
+                if (content.charAt(i) == placeholder.charAt(0)) {
+                    boolean flag = true;
+                    for (int j = 0; j < placeholder.length(); j++) {
+                        if (content.charAt(i + j) != placeholder.charAt(j)) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        placeholderIndex.add(i);
+                        i += placeholder.length();
+                    }
+                }
+            }
+        }
+        return placeholderIndex;
+    }
 
-		return placeholderIndex;
-	}
-	
 }
