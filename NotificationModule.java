@@ -12,51 +12,59 @@ public class NotificationModule {
         filledTemplates = new ArrayList<>();
     }
 
-    public void storeTemplate(Source source, String subject) {
+    public boolean storeTemplate(Source source, String subject) {
         // search template by subject in arraylist
         // store placeholder, subject and content in one variable
         // call source.writeToSource()
+        if(!source.writeToSource("PLACE CONTENT HERE")) return false;
+        else return true;
     }
 
-    public void readTemplate(Source source) {
+    public boolean readTemplate(Source source) {
         // call source.readSource()
-        // create new template object
-        // set first line as placeholder
-        // set second line as subject
-        // set remaining as content
-        // add object to templates arraylist
+        if (!source.readSource().equals(null)) {
+            // create new template object
+            // set first line as placeholder
+            // set second line as subject
+            // set remaining as content
+            // add object to templates arraylist
+            return true;
+        } else return false;
     }
 
-    public void createTemplate(String subject, String content, String placeholder) {
+    public boolean createTemplate(String subject, String content, String placeholder) {
 
         TemplateParser parser = new TemplateParser();
         ArrayList<Integer> parsedContent = parser.parse(content, placeholder);
 
-        NotificationTemplate newTemplate = new NotificationTemplate();
-
-        newTemplate.setContent(content);
-        newTemplate.setPlaceholderIndices(parsedContent);
-        newTemplate.setSubject(subject);
-
-        templates.add(newTemplate);
+        if (!parsedContent.equals(null)) {
+            NotificationTemplate newTemplate = new NotificationTemplate();
+            newTemplate.setContent(content);
+            newTemplate.setPlaceholderIndices(parsedContent);
+            newTemplate.setSubject(subject);
+            templates.add(newTemplate);
+            return true;
+        } else return false;
 
     }
 
-    public void updateTemplate(Source source, String newContent, String newPlaceholder) {
+    public boolean updateTemplate(Source source, String newContent, String newPlaceholder) {
         // read source
         if (!source.readSource().equals(null)) {
             // search for subject in arraylist
             // update content in arraylist
             // update placeholder in arraylist
             // call source.writeToSource() using newPlaceholder + subject + newContent
-        }
+            return true;
+        } else return false;
     }
 
-    public void deleteTemplate(Source source) {
+    public boolean deleteTemplate(Source source) {
         // read sources & search for subject
         // search for template by subject
         // delete from arraylist
         // call source.deleteSource()
+        return source.deleteSource();
     }
 
     public void fillTemplate(String subject, ArrayList<String> values) {
