@@ -18,7 +18,7 @@ public class FileSource extends Source {
             if (scanner.hasNext()) {
                 data += scanner.nextLine();
                 if (scanner.hasNext()) {
-                    data += scanner.nextLine();
+                    data += "\n" + scanner.nextLine();
                     String content = "";
                     while (scanner.hasNext()) {
                         content += scanner.nextLine();
