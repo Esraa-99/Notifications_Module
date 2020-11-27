@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class TemplateParser {
 	
-	private ArrayList <int> placeholderIndex;
+	private ArrayList <Integer> placeholderIndex;
 	
-	public ArrayList<int> parse(String content, String placeholder){
+	public ArrayList<Integer> parse(String content, String placeholder){
 		
 		return placeholderIndex;
 	}
