@@ -5,7 +5,7 @@ public class NotificationTemplate {
 	String subject;
 	String content;
 	String placeholder;
-	ArrayList<int> placeholderIndices;
+	ArrayList<Integer> placeholderIndices;
 
 	public void setSubject(String subject) {
 		this.subject=subject;
@@ -28,10 +28,10 @@ public class NotificationTemplate {
 		return placeholder;
 	}
 	
-	public void setPlaceholderIndices(ArrayList<int> placeholderIndices) {
+	public void setPlaceholderIndices(ArrayList<Integer> placeholderIndices) {
 		this.placeholderIndices=placeholderIndices;
 	}
-	public ArrayList<int> getPlaceholderIndices() {
+	public ArrayList<Integer> getPlaceholderIndices() {
 		return placeholderIndices;
 	}
 	
