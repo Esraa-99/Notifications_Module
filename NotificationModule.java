@@ -12,26 +12,19 @@ public class NotificationModule {
         filledTemplates = new ArrayList<>();
     }
 
-    public void storeTemplates(String path) {
-        File file = new File(path);
-        if (file.isDirectory()) {
-            // iterate over templates
-            // if file doesn't already exist
-            // create file by number
-            // read subject, content
-            // write to file
-        }
+    public void storeTemplate(Source source, String subject) {
+        // search template by subject in arraylist
+        // store placeholder, subject and content in one variable
+        // call source.writeToSource()
     }
 
-    public void readTemplates(String path) {
-        File file = new File(path);
-        if (file.isDirectory()) {
-            // iterate over files
-            // create new template object
-            // read first line, set as subject
-            // read rest of file, set as content
-            // add object to templates arraylist
-        }
+    public void readTemplate(Source source) {
+        // call source.readSource()
+        // create new template object
+        // set first line as placeholder
+        // set second line as subject
+        // set remaining as content
+        // add object to templates arraylist
     }
 
     public void createTemplate(String subject, String content, String placeholder) {
@@ -49,19 +42,21 @@ public class NotificationModule {
 
     }
 
-    public void updateTemplate(String subject, String newContent, String newPlaceholder) {
-        // search for template by subject
-        // get old template file index
-        // delete old template file
-        // update content in arraylist
-        // update placeholder in arraylist
-        // save new template file
+    public void updateTemplate(Source source, String newContent, String newPlaceholder) {
+        // read source
+        if (!source.readSource().equals(null)) {
+            // search for subject in arraylist
+            // update content in arraylist
+            // update placeholder in arraylist
+            // call source.writeToSource() using newPlaceholder + subject + newContent
+        }
     }
 
-    public void deleteTemplate(String subject) {
+    public void deleteTemplate(Source source) {
+        // read sources & search for subject
         // search for template by subject
         // delete from arraylist
-        // delete template file
+        // call source.deleteSource()
     }
 
     public void fillTemplate(String subject, ArrayList<String> values) {
