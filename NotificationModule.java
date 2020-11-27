@@ -66,9 +66,18 @@ public class NotificationModule {
         // add newTemplate to filledTemplates
     }
 
-    public NotificationTemplate findTemplate(String subject) {
-        // search for template by subject in arraylist
-        // return null if not found
-        return null;
-    }
+   public NotificationTemplate findTemplate(String subject) {
+		int i = 0;
+		boolean found = false;
+		while (i < templates.size()) {
+			if (subject.equals(templates.get(i).getSubject())) {
+				found = true;
+				break;
+			}
+		}
+		if (found)
+			return templates.get(i);
+		else
+			return null;
+	}
 }
