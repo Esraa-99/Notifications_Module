@@ -2,11 +2,10 @@ import java.util.ArrayList;
 
 public class TemplateParser {
 
-    private ArrayList<Integer> placeholderIndex;
+    private ArrayList<Integer> placeholderIndex = new ArrayList<>();
 
     public ArrayList<Integer> parse(String content, String placeholder) {
         if (placeholder.length() > 0 && content.length() > 0) {
-            placeholderIndex = new ArrayList<>();
             for (int i = 0; i < content.length(); i++) {
                 if (content.charAt(i) == placeholder.charAt(0)) {
                     boolean flag = true;

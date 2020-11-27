@@ -40,29 +40,21 @@ public class NotificationTemplate {
     }
 
     public void insertValues(ArrayList<String> values) {
-        if (values.size() != placeholderIndices.size()) {
-            if (values.size() < placeholderIndices.size()) {
-                for (int i = values.size(); i < placeholderIndices.size(); i++)
-                    values.add(null);
-            } else {
-                for (int i = placeholderIndices.size(); i < values.size(); i++)
-                    values.remove(i);
-            }
-        }
-        int k = 0;
-        for (int i = 0; i < content.length(); i++) {
-            if (content.charAt(i) == placeholder.charAt(0)) {
-                String remove = "";
-                for (int j = 0; j < placeholder.length(); j++) {
-                    remove += content.charAt(i + j);
-                }
-                if (remove.equals(placeholder)) {
-                    String part1 = content.substring(0, i);
-                    String part2 = content.substring(i + placeholder.length());
-                    content = part1 + values.get(k) + part2;
-                    k++;
-                }
-            }
+        int offset = 0;
+        int max = placeholderIndices.size();
+        if (values.size() < max) max = values.size();
+        for (int i = 0; i < max; i++) {
+            int end = placeholderIndices.get(i) + offset;
+            int start = end + placeholder.length();
+            if (end > content.length()) end = content.length();
+            if (start > content.length()) start = content.length();
+            String part1 = content.substring(0, end);
+            String part2 = content.substring(start);
+            content = part1 + values.get(i) + part2;
+
+            if (values.get(i).length() >= placeholder.length()) {
+                offset += values.get(i).length() - placeholder.length();
+            } else offset -= placeholder.length() - values.get(i).length();
         }
     }
 }

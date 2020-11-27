@@ -23,6 +23,7 @@ public class NotificationModule {
             newTemplate.setContent(content);
             newTemplate.setPlaceholderIndices(parsedContent);
             newTemplate.setSubject(subject);
+            newTemplate.setPlaceholder(placeholder);
             templates.add(newTemplate);
             return true;
         } else return false;
@@ -31,7 +32,7 @@ public class NotificationModule {
 
     public boolean readTemplate(Source source) {
         String data = source.readSource();
-        if (!source.readSource().equals(null)) {
+        if (!(source.readSource() == null)) {
             String placeholder = "";
             String subject = "";
             String content = "";
@@ -68,7 +69,7 @@ public class NotificationModule {
     public boolean updateTemplate(Source source, String newContent, String newPlaceholder) {
         String data = source.readSource();
         boolean flag = false;
-        if (!data.equals(null)) {
+        if (!(data == null)) {
             int i = data.indexOf('\n') + 1;
             if (i >= 0) {
                 String subject = "";
@@ -76,9 +77,17 @@ public class NotificationModule {
                     if (data.charAt(i) == '\n') break;
                     subject += data.charAt(i);
                 }
+                TemplateParser parser = new TemplateParser();
                 NotificationTemplate matchingTemplate = findTemplate(subject);
+                boolean found = true;
+                if (matchingTemplate == null) {
+                    matchingTemplate = new NotificationTemplate();
+                    found = false;
+                }
                 matchingTemplate.setContent(newContent);
                 matchingTemplate.setPlaceholder(newPlaceholder);
+                matchingTemplate.setPlaceholderIndices(parser.parse(newContent, newPlaceholder));
+                if (!found) templates.add(matchingTemplate);
                 data = newPlaceholder + '\n';
                 data += subject + '\n';
                 data += newContent;
@@ -91,7 +100,7 @@ public class NotificationModule {
     public boolean deleteTemplate(Source source) {
         boolean flag = false;
         String data = source.readSource();
-        if (!data.equals(null)) {
+        if (!(data == null)) {
             int i = data.indexOf('\n') + 1;
             if (i >= 0) {
                 String subject = "";
@@ -110,7 +119,7 @@ public class NotificationModule {
     public boolean storeTemplate(Source source, String subject) {
         NotificationTemplate matchingTemplate = findTemplate(subject);
         boolean flag = false;
-        if (!matchingTemplate.equals(null)) {
+        if (!(matchingTemplate == null)) {
             String data = "";
             data += matchingTemplate.getPlaceholder() + "\n";
             data += matchingTemplate.getSubject() + "\n";
@@ -120,9 +129,10 @@ public class NotificationModule {
         return flag;
     }
 
-    public void fillTemplate(String subject, ArrayList<String> values) {
+    public boolean fillTemplate(String subject, ArrayList<String> values) {
         NotificationTemplate matchingTemplate = findTemplate(subject);
-        if (!matchingTemplate.equals(null)) {
+        boolean flag = false;
+        if (!(matchingTemplate == null)) {
             NotificationTemplate newTemplate = new NotificationTemplate();
             newTemplate.setSubject(matchingTemplate.getSubject());
             newTemplate.setPlaceholder(matchingTemplate.getPlaceholder());
@@ -130,7 +140,9 @@ public class NotificationModule {
             newTemplate.setPlaceholderIndices(matchingTemplate.getPlaceholderIndices());
             newTemplate.insertValues(values);
             filledTemplates.add(newTemplate);
+            flag = true;
         }
+        return flag;
     }
 
     public NotificationTemplate findTemplate(String subject) {
