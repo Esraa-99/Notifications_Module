@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 public class NotificationModule {
 
-    ArrayList<Notification> notifications;
     ArrayList<NotificationTemplate> templates;
     ArrayList<NotificationTemplate> filledTemplates;
 
     NotificationModule() {
-        notifications = new ArrayList<>();
         templates = new ArrayList<>();
         filledTemplates = new ArrayList<>();
     }
