@@ -18,7 +18,7 @@ public class NotificationModule {
         TemplateParser parser = new TemplateParser();
         ArrayList<Integer> parsedContent = parser.parse(content, placeholder);
 
-        if (!parsedContent.equals(null)) {
+        if (!(parsedContent == null)) {
             NotificationTemplate newTemplate = new NotificationTemplate();
             newTemplate.setContent(content);
             newTemplate.setPlaceholderIndices(parsedContent);
