@@ -1,15 +1,17 @@
 
-public interface  Channel {
-	String destination="";
+public interface Channel {
+    String destination = new String();
 
-	public default void setDestination(String destination) {
-	}
+    public default void setDestination(String destination) {
+        if (verifyDestination(destination)) {
+            setDestination(destination);
+        }
+    }
 
-	public default String getDestination() {
-		return destination;
-	}
-	public default boolean verifyDestination() {
-		return false;
-	}
+    public default String getDestination() {
+        return destination;
+    }
+
+    public boolean verifyDestination(String destination);
 }
 	
