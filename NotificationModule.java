@@ -12,26 +12,6 @@ public class NotificationModule {
         filledTemplates = new ArrayList<>();
     }
 
-    public boolean storeTemplate(Source source, String subject) {
-        // search template by subject in arraylist
-        // store placeholder, subject and content in one variable
-        // call source.writeToSource()
-        if(!source.writeToSource("PLACE CONTENT HERE")) return false;
-        else return true;
-    }
-
-    public boolean readTemplate(Source source) {
-        // call source.readSource()
-        if (!source.readSource().equals(null)) {
-            // create new template object
-            // set first line as placeholder
-            // set second line as subject
-            // set remaining as content
-            // add object to templates arraylist
-            return true;
-        } else return false;
-    }
-
     public boolean createTemplate(String subject, String content, String placeholder) {
 
         TemplateParser parser = new TemplateParser();
@@ -46,6 +26,18 @@ public class NotificationModule {
             return true;
         } else return false;
 
+    }
+
+    public boolean readTemplate(Source source) {
+        // call source.readSource()
+        if (!source.readSource().equals(null)) {
+            // create new template object
+            // set first line as placeholder
+            // set second line as subject
+            // set remaining as content
+            // add object to templates arraylist
+            return true;
+        } else return false;
     }
 
     public boolean updateTemplate(Source source, String newContent, String newPlaceholder) {
@@ -65,6 +57,14 @@ public class NotificationModule {
         // delete from arraylist
         // call source.deleteSource()
         return source.deleteSource();
+    }
+
+    public boolean storeTemplate(Source source, String subject) {
+        // search template by subject in arraylist
+        // store placeholder, subject and content in one variable
+        // call source.writeToSource()
+        if(!source.writeToSource("PLACE CONTENT HERE")) return false;
+        else return true;
     }
 
     public void fillTemplate(String subject, ArrayList<String> values) {
