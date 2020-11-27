@@ -6,6 +6,10 @@ import java.util.Scanner;
 
 public class FileSource extends Source {
 
+    FileSource(String source) {
+        super(source);
+    }
+
     @Override
     public String readSource() {
         File file = new File(source);
