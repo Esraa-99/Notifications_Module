@@ -1,6 +1,6 @@
-import java.io.*;
+package src;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class NotificationModule {
