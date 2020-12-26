@@ -1,7 +1,7 @@
 package Notification_Module.Template;
 
 public abstract class Source {
-	
+
 	String source;
 
 	Source() {
@@ -23,7 +23,7 @@ public abstract class Source {
 	public abstract NotificationTemplate readSource(String target);
 
 	public abstract boolean writeToSource(NotificationTemplate template);
-	
+
 	public abstract boolean updateSource(String target, NotificationTemplate template);
 
 	public abstract boolean deleteFromSource(String target);
