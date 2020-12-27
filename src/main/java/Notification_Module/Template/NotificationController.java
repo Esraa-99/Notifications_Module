@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NotificationController {
 	private String[] values;
 	private String subject;
-	private Channel channel;
 	public String[] getValues() {
 		return values;
 	}
@@ -19,11 +18,4 @@ public class NotificationController {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public Channel getChannel() {
-		return channel;
-	}
-	public void setChannel(Channel channel) {
-		this.channel = channel;
-	}
-	
 }
