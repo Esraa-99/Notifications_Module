@@ -29,13 +29,14 @@ public class DBSource extends Source {
 	@Override
 	public NotificationTemplate readSource(String target) {
 		try {
-			NotificationTemplate newTemplate = new NotificationTemplate();
+			NotificationTemplate newTemplate = null;
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(source, username, password);
 			Statement stmt = con.createStatement();
 			String query = "SELECT * FROM Templates WHERE subject='" + target + "'";
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()) {
+				newTemplate = new NotificationTemplate();
 				newTemplate.setPlaceholder(rs.getString("placeholder"));
 				newTemplate.setSubject(rs.getString("subject"));
 				newTemplate.setContent(rs.getString("content"));
