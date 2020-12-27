@@ -10,14 +10,20 @@ public class DBQueueHandler implements QueueHandler {
 		Connection Con = null;
 		Statement Stmt = null;
 		ResultSet RS = null;
+		String typeOfChannel;
 		try {
 			Con = DriverManager.getConnection(databaseCon.getSource());
 			String notiCreationDate = java.time.LocalDate.now().toString();
 			Stmt = Con.createStatement();
 			RS = Stmt.executeQuery("SELECT * FROM Notifications");
+			if (channel instanceof SMS ) {
+				typeOfChannel="SMS";
+			}
+			else 
+				typeOfChannel="Email";
 			do {
 				Stmt.executeUpdate("INSERT INTO Notifications (subject,content,channel,date) " + "VALUES('"
-						+ template.getSubject() + "'," + "'" +  template.getContent()  + "'," + "'" + channel.getChannel()
+						+ template.getSubject() + "'," + "'" +  template.getContent()  + "'," + "'" + typeOfChannel
 						+ ",'" + "'" + notiCreationDate + "')");
 			} while (RS.next());
 			RS.close();
