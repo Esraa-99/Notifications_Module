@@ -1,9 +1,16 @@
+/**
+ * 
+ */
 package Notification_Module.Template;
 
-public class Channel {
-	String channel;
+/**
+ * @author www
+ *
+ */
+public interface Channel {
 
-	public String getChannel() {
-		return channel;
-	}
+public void send(NotificationTemplate notification);
 }
+ 
+ 
+ 
