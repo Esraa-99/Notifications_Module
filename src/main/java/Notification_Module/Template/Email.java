@@ -3,10 +3,13 @@
  */
 package Notification_Module.Template;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author www
  *
  */
+@XmlRootElement
 public class Email implements Channel {
 private String email_address ;
 	@Override

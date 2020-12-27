@@ -35,7 +35,10 @@ public class NotificationTemplate {
 		return placeholder;
 	}
 
-	public void insertValues(ArrayList<String> values) {
+	public void insertValues(String[] userValues) {
+		ArrayList<String> values = new ArrayList<String>();
+		for (int i = 0; i < userValues.length; i++)
+			values.add(userValues[i]);
 		TemplateParser parser = new TemplateParser();
 		ArrayList<Integer> placeholderIndices = parser.parse(content, placeholder);
 		int offset = 0;
