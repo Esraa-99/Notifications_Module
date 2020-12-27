@@ -20,6 +20,11 @@ public class DBSource extends Source {
 	}
 
 	@Override
+	public String getSource() {
+		return super.getSource() + "?" + "user=" + username + "&password=" + password;
+	}
+
+	@Override
 	public NotificationTemplate readSource(String target) {
 		try {
 			NotificationTemplate newTemplate = new NotificationTemplate();
