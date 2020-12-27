@@ -1,11 +1,20 @@
-package Notification_Module.Template;
+package Notification_Module.Service;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import Controllers.NotificationController;
+import Controllers.NotificationTemplate;
+import Utility.Channel;
+import Utility.DBQueueHandler;
+import Utility.DBSource;
+import Utility.Email;
+import Utility.QueueHandler;
+import Utility.SMS;
+import Utility.Source;
 
 @Path("/Notification")
 public class Notification {

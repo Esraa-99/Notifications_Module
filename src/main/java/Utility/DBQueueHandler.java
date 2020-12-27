@@ -1,8 +1,10 @@
-package Notification_Module.Template;
+package Utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+
+import Controllers.NotificationTemplate;
 
 public class DBQueueHandler implements QueueHandler {
 	public void queing(NotificationTemplate template, Channel channel, Source databaseCon) {

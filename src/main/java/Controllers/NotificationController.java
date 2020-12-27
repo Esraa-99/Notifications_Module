@@ -1,4 +1,4 @@
-package Notification_Module.Template;
+package Controllers;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

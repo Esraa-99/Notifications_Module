@@ -1,4 +1,4 @@
-package Notification_Module.Template;
+package Utility;
 
 import java.util.ArrayList;
 

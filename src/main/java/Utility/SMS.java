@@ -1,6 +1,8 @@
-package Notification_Module.Template;
+package Utility;
 
 import javax.xml.bind.annotation.XmlRootElement;
+
+import Controllers.NotificationTemplate;
 
 @XmlRootElement
 public class SMS implements Channel {

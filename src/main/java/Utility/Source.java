@@ -1,4 +1,6 @@
-package Notification_Module.Template;
+package Utility;
+
+import Controllers.NotificationTemplate;
 
 public abstract class Source {
 

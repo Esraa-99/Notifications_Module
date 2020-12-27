@@ -1,8 +1,10 @@
-package Notification_Module.Template;
+package Controllers;
 
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlRootElement;
+
+import Utility.TemplateParser;
 
 @XmlRootElement
 public class NotificationTemplate {

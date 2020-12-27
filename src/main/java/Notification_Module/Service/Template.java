@@ -1,8 +1,12 @@
 
-package Notification_Module.Template;
+package Notification_Module.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+
+import Controllers.NotificationTemplate;
+import Utility.DBSource;
+import Utility.Source;
 
 @Path("/template")
 public class Template {

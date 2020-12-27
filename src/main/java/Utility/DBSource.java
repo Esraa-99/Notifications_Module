@@ -1,6 +1,8 @@
-package Notification_Module.Template;
+package Utility;
 
 import java.sql.*;
+
+import Controllers.NotificationTemplate;
 
 public class DBSource extends Source {
 
