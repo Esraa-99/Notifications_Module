@@ -16,7 +16,7 @@ import Utility.QueueHandler;
 import Utility.SMS;
 import Utility.Source;
 
-@Path("/Notification")
+@Path("/notification")
 public class Notification {
 
 	Source source = new DBSource("jdbc:mysql://localhost:3306/NotificationModule", "mohanad", "7526819");

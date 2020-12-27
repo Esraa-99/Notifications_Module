@@ -20,8 +20,8 @@ public class DBQueueHandler implements QueueHandler {
 			} else
 				typeOfChannel = "Email";
 			Stmt.executeUpdate(
-					"INSERT INTO Notifications (subject,content,channel,date) VALUES('" + template.getSubject() + "',"
-							+ "'" + template.getContent() + "', '" + typeOfChannel + "', '" + notiCreationDate + "')");
+					"INSERT INTO Notifications (subject,content,channel,date,destination) VALUES('" + template.getSubject() + "',"
+							+ "'" + template.getContent() + "', '" + typeOfChannel + "', '" + notiCreationDate + "', '" + channel.getDestination() + "')");
 			Con.close();
 			Stmt.close();
 		} catch (Exception e) {

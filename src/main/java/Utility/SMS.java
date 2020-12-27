@@ -9,7 +9,7 @@ public class SMS implements Channel {
 	
 	private String phone_no;
 
-	public String getPhone_no() {
+	public String getDestination() {
 		return phone_no;
 	}
 

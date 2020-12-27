@@ -13,7 +13,7 @@ public class Email implements Channel {
 		// TODO Auto-generated method stub
 
 	}
-	public String getEmail_address() {
+	public String getDestination() {
 		return email_address;
 	}
 	public void setEmail_address(String email_address) {
