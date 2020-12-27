@@ -34,7 +34,7 @@ public class NotificationTemplate {
 	public String getPlaceholder() {
 		return placeholder;
 	}
-	
+
 	public void insertValues(ArrayList<String> values) {
 		TemplateParser parser = new TemplateParser();
 		ArrayList<Integer> placeholderIndices = parser.parse(content, placeholder);
