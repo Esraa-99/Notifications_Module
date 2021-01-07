@@ -14,9 +14,17 @@ CREATE TABLE Notifications(
 	notificationID  int NOT NULL AUTO_INCREMENT,
 	subject varchar(100) NOT NULL,
     content TEXT NOT NULL,
-    SMS varchar(10) NOT NULL,
-    Email varchar(10) NOT NULL,
     date date,
     destination varchar(100) NOT NULL,
     PRIMARY KEY (notificationID)
+);
+
+CREATE TABLE SMS(
+	phoneNo    varchar(15) ,
+	PRIMARY KEY (phoneNo)
+);
+
+CREATE TABLE Email(
+	emailAddress    varchar(25),
+	PRIMARY KEY (emailAddress)
 );
