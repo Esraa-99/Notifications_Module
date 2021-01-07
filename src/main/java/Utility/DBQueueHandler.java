@@ -11,17 +11,21 @@ public class DBQueueHandler implements QueueHandler {
 		Connection Con = null;
 		Statement Stmt = null;
 		String typeOfChannel;
+		SMS sms= new SMS ();
+		Email email = new Email();
+		
 		try {
 			Con = DriverManager.getConnection(databaseCon.getSource());
 			String notiCreationDate = java.time.LocalDate.now().toString();
 			Stmt = Con.createStatement();
 			if (channel instanceof SMS) {
-				typeOfChannel = "SMS";
+				Stmt.executeUpdate("INSERT INTO SMS (phoneNo) VALUES('" + sms.getDestination() + "')");
 			} else
-				typeOfChannel = "Email";
+				Stmt.executeUpdate("INSERT INTO Email (emailAddress) VALUES('" + email.getDestination() + "')");
 			Stmt.executeUpdate(
-					"INSERT INTO Notifications (subject,content,channel,date,destination) VALUES('" + template.getSubject() + "',"
-							+ "'" + template.getContent() + "', '" + typeOfChannel + "', '" + notiCreationDate + "', '" + channel.getDestination() + "')");
+					"INSERT INTO Notifications (subject,content,date,destination) VALUES('" + template.getSubject() + "',"
+							+ "'" + template.getContent()  + "', '" + notiCreationDate + "', '" + channel.getDestination() + "')");
+			
 			Con.close();
 			Stmt.close();
 		} catch (Exception e) {
