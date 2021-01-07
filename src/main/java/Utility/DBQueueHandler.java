@@ -32,5 +32,34 @@ public class DBQueueHandler implements QueueHandler {
 			e.printStackTrace();
 		}
 	}
+	public ArrayList <NotificationTemplate> dequeing(Channel channel, Source databaseCon) {
+		Connection Con = null;
+		Statement Stmt = null;
+		ResultSet RS=null; 
+		ArrayList <NotificationTemplate> notifications = new ArrayList <>();
+		try {
+		Con = DriverManager.getConnection(databaseCon.getSource());
+		RS=Stmt.executeQuery("SELECT * FROM notifications");
+		int numberOfnoti= Integer.parseInt(RS.getString("notificationID"));
+		String subject = RS.getString("subject");
+		String content = RS.getString("content");
+		String destination = RS.getString("destination");
+		if (RS.next()) {
+		for (int i=1; i<numberOfnoti; i++) {
+			NotificationTemplate notification;
+			notification.setSubject(subject);
+			notification.setContent(content);
+			channel.setDestination(destination);
+			notifications.add(notification);
+			}
+		}
+		RS.close();
+		Con.close();
+		Stmt.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return notifications;
+	}
 
 }
