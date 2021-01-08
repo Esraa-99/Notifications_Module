@@ -1,12 +1,9 @@
 package Utility;
 
-import Controllers.NotificationTemplate;
+import Controllers.NotificationController;
 
 public interface QueueHandler {
+	public void queue(NotificationController notification);
 
-	public void queing(NotificationTemplate template, Channel channel);
-
-	public boolean dequeueSMS(int notificationID);
-
-	public boolean dequeueEmail(int notificationID);
+	public boolean dequeue(int notificationID);
 }
