@@ -31,7 +31,10 @@ public class EmailQueueHandler implements QueueHandler {
 				Statement Stmt = Con.createStatement();
 				Stmt.executeUpdate("INSERT INTO Notifications (subject,content) VALUES('" + template.getSubject() + "',"
 						+ "'" + template.getContent() + "')");
-				Stmt.executeUpdate("INSERT INTO Email (emailAddress) VALUES('" + email.getDestination() + "')");
+				ResultSet rs = Stmt.executeQuery("SELECT * FROM Notifications WHERE subject = '" + template.getSubject() + "'");
+				rs.next();
+				Stmt.executeUpdate("INSERT INTO Email (emailAddress, notificationID) VALUES('" + email.getDestination() + "', '" + rs.getString("notificationID") + "')");
+				rs.close();
 				Con.close();
 				Stmt.close();
 			} catch (Exception e) {
