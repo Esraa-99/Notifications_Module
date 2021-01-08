@@ -28,7 +28,7 @@ public class Notification {
 		NotificationTemplate template = source.readSource(notification.getSubject());
 		if (template != null) {
 			template.insertValues(notification.getValues());
-			QueueHandler queue = new DBQueueHandler();
+			QueueHandler queue = new DBQueueHandler(source);
 			Channel notificationChannel = null;
 			if (channel.equalsIgnoreCase("email")) {
 				notificationChannel = (Email) new Email();
@@ -37,7 +37,7 @@ public class Notification {
 				notificationChannel = (SMS) new SMS();
 				((SMS) notificationChannel).setPhone_no(notification.getDestination());
 			}
-			queue.queing(template, notificationChannel, source);
+			queue.queing(template, notificationChannel);
 		}
 	}
 }
