@@ -2,7 +2,9 @@ package Utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import Controllers.NotificationTemplate;
 
@@ -10,7 +12,6 @@ public class DBQueueHandler implements QueueHandler {
 	public void queing(NotificationTemplate template, Channel channel, Source databaseCon) {
 		Connection Con = null;
 		Statement Stmt = null;
-		String typeOfChannel;
 		SMS sms= new SMS ();
 		Email email = new Email();
 		
@@ -32,11 +33,16 @@ public class DBQueueHandler implements QueueHandler {
 			e.printStackTrace();
 		}
 	}
-	public ArrayList <NotificationTemplate> dequeing(Channel channel, Source databaseCon) {
+	public ArrayList <NotificationTemplate> dequeing(Source databaseCon) {
 		Connection Con = null;
 		Statement Stmt = null;
 		ResultSet RS=null; 
-		ArrayList <NotificationTemplate> notifications = new ArrayList <>();
+		SMS sms= new SMS ();
+		Email email = new Email();
+		/*ArrayList <NotificationTemplate> notificationsbySMS = new ArrayList <NotificationTemplate>();
+		ArrayList <NotificationTemplate> notificationsbyEmail = new ArrayList <NotificationTemplate>();
+		*/
+		ArrayList <NotificationTemplate> notifications = new ArrayList <NotificationTemplate>();
 		try {
 		Con = DriverManager.getConnection(databaseCon.getSource());
 		RS=Stmt.executeQuery("SELECT * FROM notifications");
@@ -44,15 +50,29 @@ public class DBQueueHandler implements QueueHandler {
 		String subject = RS.getString("subject");
 		String content = RS.getString("content");
 		String destination = RS.getString("destination");
-		if (RS.next()) {
 		for (int i=1; i<numberOfnoti; i++) {
-			NotificationTemplate notification;
+			NotificationTemplate notification= new NotificationTemplate();
 			notification.setSubject(subject);
 			notification.setContent(content);
-			channel.setDestination(destination);
 			notifications.add(notification);
+			if (destination=="SMS") {                   		//For the one who will make the send function idk if this will help or not              
+			RS=Stmt.executeQuery("SELECT * FROM SMS");
+			String phoneNo=RS.getString("phoneNO");
+			sms.setPhone_no(phoneNo);
+			sms.send(notification);
+			/*NotificationTemplate notificationbySMS= new NotificationTemplate();
+			notificationbySMS.setSubject(subject);
+			notificationbySMS.setContent(content);
+			notifications.add(notificationbySMS);*/
 			}
-		}
+			if (destination=="Email") {
+				RS=Stmt.executeQuery("SELECT * FROM Email");
+				String emailAddress=RS.getString("emailAddress");
+				email.setEmail_address(emailAddress);
+				email.send(notification);
+				}
+			
+			}
 		RS.close();
 		Con.close();
 		Stmt.close();
